@@ -16,13 +16,18 @@ class UserFetcher {
     @Autowired
     private lateinit var userService: UserService
 
+    @DgsData(parentType = DgsConstants.QUERY.TYPE_NAME, field = DgsConstants.QUERY.GetAllUsers)
+    fun getAllUsers(): List<User> {
+        return userService.getUsers()
+    }
+
     @DgsData(parentType = DgsConstants.QUERY.TYPE_NAME, field = DgsConstants.QUERY.GetUser)
-    fun getUser(@InputArgument id : Long) : Optional<User>{
+    fun getUser(@InputArgument id: Long): Optional<User> {
         return userService.getUser(id)
     }
 
     @DgsData(parentType = DgsConstants.MUTATION.TYPE_NAME, field = DgsConstants.MUTATION.CreateMockUsers)
-    fun createMockUsers() : List<Long> = runBlocking {
+    fun createMockUsers(): List<Long> = runBlocking {
         userService.createMockUsers()
     }
 }

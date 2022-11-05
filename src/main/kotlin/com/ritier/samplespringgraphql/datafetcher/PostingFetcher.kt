@@ -4,7 +4,6 @@ import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.InputArgument
 import com.ritier.samplespringgraphql.DgsConstants
-import com.ritier.samplespringgraphql.dataloader.ImageDataLoader
 import com.ritier.samplespringgraphql.dto.PostingDto
 import com.ritier.samplespringgraphql.entity.Posting
 import com.ritier.samplespringgraphql.entity.User
@@ -26,12 +25,6 @@ class PostingFetcher {
 
     @DgsData(parentType = DgsConstants.QUERY.TYPE_NAME, field = DgsConstants.QUERY.GetAllPostings)
     fun getAllPostings(dfe: DataFetchingEnvironment, @InputArgument input: Optional<PaginationInput>): List<Posting> {
-        val selections = dfe.selectionSet
-        val hasCountField = selections.contains("totalCount")
-//        val isRoot = dfe.parentType.toString() == DgsConstants.QUERY.TYPE_NAME
-        if(hasCountField){
-
-        }
         return if (input.isEmpty) {
             postingService.getAllPostings(null)
         } else {

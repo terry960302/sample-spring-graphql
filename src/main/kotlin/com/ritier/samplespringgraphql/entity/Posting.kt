@@ -18,7 +18,7 @@ data class Posting(
     @Column(name = "created_at")
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = User::class)
+    @ManyToOne(targetEntity = User::class)
     @JoinColumn(name = "user_id")
     val user: User,
 

@@ -14,10 +14,10 @@ data class User(
     @Column(name = "age") val age: Int,
 
     @OneToOne
-    @JoinColumn(name = "profile_img_id", referencedColumnName = "id")
+    @JoinColumn(name = "profile_img_id")
     val profileImg: Image? = null,
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     val postings: List<Posting>? = null
 ) {
 //    override fun toString(): String {

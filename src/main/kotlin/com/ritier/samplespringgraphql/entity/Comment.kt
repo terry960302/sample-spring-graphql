@@ -10,11 +10,11 @@ data class Comment(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id") val id: Long = 0,
 
-    @ManyToOne(fetch = FetchType.LAZY,  targetEntity = User::class)
+    @ManyToOne(targetEntity = User::class)
     @JoinColumn(name="user_id")
     val user: User,
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Posting::class)
+    @ManyToOne(targetEntity = Posting::class)
     @JoinColumn(name="posting_id") val posting: Posting,
 
     @Column(name="contents") val contents : String,

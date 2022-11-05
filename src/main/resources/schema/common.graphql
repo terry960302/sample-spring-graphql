@@ -4,6 +4,7 @@ type Aggregate{
 
 extend type Query{
     aggregatePosting : Aggregate
+    aggregateImage : Aggregate
 }
 
 input PaginationInput{

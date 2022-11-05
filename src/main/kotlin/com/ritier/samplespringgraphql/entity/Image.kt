@@ -18,8 +18,8 @@ data class Image(
 
     @Column(name="created_at") val createdAt: LocalDateTime = LocalDateTime.now(),
 
-//    @OneToOne(mappedBy = "image")
-//    val user: User? = null,
+    @OneToOne(mappedBy = "profileImg", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val user: User? = null,
 
     @OneToMany(
         mappedBy = "image",

@@ -25,7 +25,7 @@
     - [x] [Performance Tested] getAllPostings(+pagination) : 10 postings each has 100 images(normal use case in
       production) => 111ms
 - [x] Aggregate(Count) field
-  - aggregate용 쿼리를 따로 제작(기존 쿼리안에 _count 필드로 녹이는 법은 추가 학습 필요)
+  - aggregate용 쿼리를 따로 제작(기존 쿼리안에 _count 필드로 녹이는 법은 반환 객체를 감싸는 객체를 만든 후, 거기에다 _count를 넣으면 되지만 filter나 input에 대해 분기처리가 많아지는 경우 로직이 복잡해지기 쉽고, 개인적으로 프론트에서 작업할 때도 독립적인 query로 가져오는 방식을 더 사용하게 됨. 성능적인 이슈도 존재)
 - [x] Pagination(Pageable), OrderBy(Sort) etc.. Filter input
 - [ ] Security
 - [x] Instrumentation(logging, metrics) => check turnaround
