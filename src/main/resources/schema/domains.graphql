@@ -1,11 +1,11 @@
-scalar Date
+scalar LocalDate
 
 type Comment{
     id: Int!,
     user : User!,
     contents : String!,
     posting : Posting!,
-    createdAt :Date,
+    createdAt :LocalDate,
 }
 
 type Image {
@@ -13,7 +13,7 @@ type Image {
     url : String!,
     width : Int!,
     height : Int!,
-    createdAt : Date,
+    createdAt : LocalDate,
 }
 
 type Posting {
@@ -22,7 +22,7 @@ type Posting {
     contents : String!,
     images : [Image]!,
     comments : [Comment],
-    createdAt : Date
+    createdAt : LocalDate
 }
 
 type User{

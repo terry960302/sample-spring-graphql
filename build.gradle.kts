@@ -83,6 +83,7 @@ tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
 	packageName = "com.ritier.samplespringgraphql" // The package name to use to generate sources
 	generateDataTypes = true
 	language = "kotlin"
-	typeMapping = mutableMapOf()
+	typeMapping = mutableMapOf(
+	)
 //	generateClient = true // Enable generating the type safe query API
 }

@@ -4,9 +4,9 @@ type Mutation{
 }
 
 
-
 extend type Mutation{
     createComment(input : CommentInput) : Comment
+    createMockComments : [Int]
 }
 
 extend type Mutation {

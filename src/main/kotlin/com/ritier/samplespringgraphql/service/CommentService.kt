@@ -22,38 +22,25 @@ class CommentService {
 
     fun createComment(comment: Comment) = commentRepository.save(comment)
 
+    fun getAllCommentsByPostingIds(ids: List<Long>): MutableMap<Long, List<Comment>> {
+        val comments = commentRepository.getAllCommentsByPostingIds(ids)
+        return comments.groupBy { it.posting.id }.toMutableMap()
+    }
+
     suspend fun createMockComments() = withContext(Dispatchers.IO) {
-        val comment1 =
-            Comment(
-                user = entityManager.getReference(User::class.java, 1.toLong()),
-                contents = "alskdjalskdj",
-                posting = entityManager.getReference(Posting::class.java, 1.toLong())
+        val asyncComments = (1..100).map {
+            val charset = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz0123456789"
+            val contents = (1..100)
+                .map { charset.random() }
+                .joinToString("")
+            val comment = Comment(
+                user = entityManager.getReference(User::class.java, (1..4).random().toLong()),
+                contents = contents,
+                posting = entityManager.getReference(Posting::class.java, (1..50).random().toLong())
             )
-        val comment2 =
-            Comment(
-                user = entityManager.getReference(User::class.java, 2.toLong()),
-                contents = "미ㅓㄴㅁㅇㄴ",
-                posting = entityManager.getReference(Posting::class.java, 2.toLong())
-            )
-        val comment3 =
-            Comment(
-                user = entityManager.getReference(User::class.java, 3.toLong()),
-                contents = "ㅁ니ㅓㅏ머너애ㅑㅓㅁㄴㅇ",
-                posting = entityManager.getReference(Posting::class.java, 3.toLong())
-            )
-        val comment4 =
-            Comment(
-                user = entityManager.getReference(User::class.java, 4.toLong()),
-                contents = "ㅔㅐㅔㅑㅂㅈㅇㅁ;ㅏㄴㅇㅁㄴㅁㄴㅇㅁㄴㅇ213123",
-                posting = entityManager.getReference(Posting::class.java, 4.toLong())
-            )
-
-        val mockComments = arrayListOf(comment1, comment2, comment3, comment4)
-
-        val commentsAsync = mockComments.map {
-            async { commentRepository.save(it) }
+            async { commentRepository.save(comment) }
         }
-        val comments = commentsAsync.awaitAll()
+        val comments = asyncComments.awaitAll()
         comments.map { it.id }
     }
 }
