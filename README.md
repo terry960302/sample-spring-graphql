@@ -24,7 +24,8 @@
     - [x] [Performance Tested] getAllPostings : 100 postings each has 500 images => 1300ms
     - [x] [Performance Tested] getAllPostings(+pagination) : 10 postings each has 100 images(normal use case in
       production) => 111ms
-- [ ] Aggregate(Count) field
+- [x] Aggregate(Count) field
+  - aggregate용 쿼리를 따로 제작(기존 쿼리안에 _count 필드로 녹이는 법은 추가 학습 필요)
 - [x] Pagination(Pageable), OrderBy(Sort) etc.. Filter input
 - [ ] Security
 - [x] Instrumentation(logging, metrics) => check turnaround
@@ -74,3 +75,5 @@ logging:
 - 샘플 프로젝트
     - https://github.com/Netflix/dgs-examples-kotlin
     - https://github.com/nothingprogram/instagram-graphql
+- 쿼리 필드 셀렉션 분기처리
+  - https://piotrminkowski.com/2021/04/08/an-advanced-graphql-with-spring-boot-and-netflix-dgs/

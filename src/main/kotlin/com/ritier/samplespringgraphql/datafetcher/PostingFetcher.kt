@@ -27,8 +27,11 @@ class PostingFetcher {
     @DgsData(parentType = DgsConstants.QUERY.TYPE_NAME, field = DgsConstants.QUERY.GetAllPostings)
     fun getAllPostings(dfe: DataFetchingEnvironment, @InputArgument input: Optional<PaginationInput>): List<Posting> {
         val selections = dfe.selectionSet
-        selections.contains("totalCount")
+        val hasCountField = selections.contains("totalCount")
+//        val isRoot = dfe.parentType.toString() == DgsConstants.QUERY.TYPE_NAME
+        if(hasCountField){
 
+        }
         return if (input.isEmpty) {
             postingService.getAllPostings(null)
         } else {

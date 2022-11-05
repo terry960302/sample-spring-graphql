@@ -32,6 +32,10 @@ class PostingService {
     @Autowired
     private lateinit var entityManager: EntityManager
 
+    fun countPostings() : Int{
+        return postingRepository.count().toInt()
+    }
+
     fun getAllPostings(pageable : Pageable?): List<Posting> {
         return if (pageable == null){
             postingRepository.findAll()

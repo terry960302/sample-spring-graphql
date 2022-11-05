@@ -16,7 +16,7 @@ type Image {
     createdAt : LocalDate,
 }
 
-type Posting {
+type Posting{
     id : Int!,
     user :User!,
     contents : String!,

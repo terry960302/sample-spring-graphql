@@ -6,10 +6,6 @@ extend type Query{
     aggregatePosting : Aggregate
 }
 
-input AggregatePostingFilter{
-    where : PostingInput,
-}
-
 input PaginationInput{
     page : Int = 0,
     size : Int = 10,
