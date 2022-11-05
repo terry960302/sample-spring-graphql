@@ -1,5 +1,7 @@
 # Sample-Spring-Graphql-Project (feat.Netflix DGS)
 
+<img src="https://user-images.githubusercontent.com/37768791/200105064-f6463423-7594-474c-a8e5-3852fb1b7fb9.png"/>
+
 ## Background
 
 : 2022.11월 기준으로 들어가는 사이드프로젝트에 사용할 기술스택으로 graphql이 선정되었고 기존에 spring에 대한 지식을 쌓는게 목적에 있었으므로 DGS를 체택 후 공부용으로 제작했습니다.
