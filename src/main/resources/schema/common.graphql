@@ -1,0 +1,21 @@
+type Aggregate{
+    count : Int
+}
+
+extend type Query{
+    aggregatePosting : Aggregate
+}
+
+input AggregatePostingFilter{
+    where : PostingInput,
+}
+
+input PaginationInput{
+    page : Int = 0,
+    size : Int = 10,
+}
+
+schema {
+    query : Query,
+    mutation: Mutation
+}

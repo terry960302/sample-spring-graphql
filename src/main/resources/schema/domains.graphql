@@ -1,0 +1,33 @@
+scalar Date
+
+type Comment{
+    id: Int!,
+    user : User!,
+    contents : String!,
+    posting : Posting!,
+    createdAt :Date,
+}
+
+type Image {
+    id : Int!,
+    url : String!,
+    width : Int!,
+    height : Int!,
+    createdAt : Date,
+}
+
+type Posting {
+    id : Int!,
+    user :User!,
+    contents : String!,
+    images : [Image]!,
+    comments : [Comment],
+    createdAt : Date
+}
+
+type User{
+    id : Int!,
+    nickname : String!,
+    age : Int!,
+    profileImg : Image,
+}

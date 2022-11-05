@@ -1,0 +1,20 @@
+
+type Query{
+    getAllImages(filter : ImageFilter) : [Image],
+    getImage(id : Int!) : Image
+}
+
+extend type Query{
+    getAllCommentsByPostingId(postingId : Int!) : [Comment],
+    getComment(id : Int!) : Comment
+}
+
+extend type Query{
+    getAllPostings(input : PaginationInput) : [Posting],
+    getPosting(id : Int!) : Posting,
+}
+
+extend type Query{
+    getAllUsers : [User],
+    getUser(id : Int!) : User
+}

@@ -1,0 +1,45 @@
+type Mutation{
+    createImage(input : ImageInput!) : Image
+    createMockImages : [Int]
+}
+
+
+
+extend type Mutation{
+    createComment(input : CommentInput) : Comment
+}
+
+extend type Mutation {
+    createPosting(input : PostingInput ) : Posting
+    createMockPostings : [Int]
+}
+
+extend type Mutation{
+    createMockUsers : [Int]
+}
+
+
+# ----- input -----
+input CommentInput{
+    userId : Int!,
+    contents : String!,
+    postingId : Int!,
+}
+
+input ImageFilter {
+    width : Int,
+    height : Int,
+}
+
+input ImageInput {
+    url : String!,
+    width : Int!,
+    height: Int!,
+}
+
+input PostingInput{
+    userId : Int!,
+    contents : String!,
+    images : [ImageInput],
+}
+
