@@ -1,6 +1,5 @@
 package com.ritier.samplespringgraphql.service
 
-import com.ritier.samplespringgraphql.dto.PostingDto
 import com.ritier.samplespringgraphql.entity.*
 import com.ritier.samplespringgraphql.repository.PostingImageRepository
 import com.ritier.samplespringgraphql.repository.PostingRepository
@@ -47,11 +46,6 @@ class PostingService {
     }
 
     fun getPosting(id: Long): Optional<Posting> = postingRepository.findById(id)
-
-    fun searchPostingsByContents(keyword: String): List<PostingDto> {
-        val postings = postingRepository.findAll(PostingSpecifications.contentsLike(keyword))
-        return postings.map { modelMapper.map(it, PostingDto::class.java) }
-    }
 
     @Transactional
     suspend fun createMockPostings(): List<Long> = withContext(Dispatchers.IO) {

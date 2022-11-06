@@ -28,7 +28,8 @@ data class Posting(
     @OneToMany(
         mappedBy = "posting",
         cascade = [CascadeType.ALL],
-        orphanRemoval = true
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
     )
     val postingImages: List<PostingImage>? = null,
 ) {

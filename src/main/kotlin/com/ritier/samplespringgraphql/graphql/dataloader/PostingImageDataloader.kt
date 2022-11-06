@@ -1,4 +1,4 @@
-package com.ritier.samplespringgraphql.dataloader
+package com.ritier.samplespringgraphql.graphql.dataloader
 
 import com.netflix.graphql.dgs.DgsDataLoader
 import com.ritier.samplespringgraphql.entity.Image

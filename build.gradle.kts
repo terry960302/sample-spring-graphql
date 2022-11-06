@@ -47,6 +47,12 @@ dependencies {
 	implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release"))
 	implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
 	implementation("com.netflix.graphql.dgs:graphql-dgs-extended-scalars")
+
+	// security
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("io.jsonwebtoken:jjwt:0.9.1") // jwt
+	implementation("org.mindrot:jbcrypt:0.4") // hash
 }
 
 extra["kotlin.version"] = "1.4.31"

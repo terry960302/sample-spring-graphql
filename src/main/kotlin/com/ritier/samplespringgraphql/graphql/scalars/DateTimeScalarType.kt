@@ -1,4 +1,4 @@
-package com.ritier.samplespringgraphql.scalars
+package com.ritier.samplespringgraphql.graphql.scalars
 
 import com.netflix.graphql.dgs.DgsScalar
 import graphql.language.StringValue
@@ -14,7 +14,7 @@ class DateTimeScalarType : Coercing<LocalDateTime?, String?> {
     @Throws(CoercingSerializeException::class)
     override fun serialize(dataFetcherResult: Any): String {
         return if (dataFetcherResult is LocalDateTime) {
-            (dataFetcherResult as LocalDateTime).format(DateTimeFormatter.ISO_DATE_TIME)
+            (dataFetcherResult).format(DateTimeFormatter.ISO_DATE_TIME)
         } else {
             throw CoercingSerializeException("Not a valid DateTime")
         }

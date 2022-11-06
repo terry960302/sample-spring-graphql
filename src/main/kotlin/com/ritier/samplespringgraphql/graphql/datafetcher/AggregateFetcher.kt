@@ -1,4 +1,4 @@
-package com.ritier.samplespringgraphql.datafetcher
+package com.ritier.samplespringgraphql.graphql.datafetcher
 
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData

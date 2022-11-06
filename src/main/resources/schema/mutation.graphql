@@ -1,21 +1,33 @@
+
+# image
 type Mutation{
     createImage(input : ImageInput!) : Image
     createMockImages : [Int]
 }
 
-
+# comment
 extend type Mutation{
     createComment(input : CommentInput) : Comment
     createMockComments : [Int]
 }
 
+# posting
 extend type Mutation {
     createPosting(input : PostingInput ) : Posting
     createMockPostings : [Int]
 }
 
+# user
 extend type Mutation{
     createMockUsers : [Int]
+    mockSignUp : AuthToken
+}
+
+# credential
+extend type Mutation{
+    signIn(input : SignInInput) : AuthToken!,
+    signUp(input : SignUpInput) : AuthToken!,
+    signOut : Boolean,
 }
 
 

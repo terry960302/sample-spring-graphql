@@ -18,7 +18,10 @@ data class User(
     val profileImg: Image? = null,
 
     @OneToMany(mappedBy = "user")
-    val postings: List<Posting>? = null
+    val postings: List<Posting>? = null,
+
+    @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val credential : UserCredential? = null,
 ) {
 //    override fun toString(): String {
 //        return "User{id = $id, nickname = $nickname, age = $age, profile_img_id : $${profileImg.toString()}}"

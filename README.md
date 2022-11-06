@@ -10,33 +10,38 @@
 
 ## ERD
 : https://github.com/terry960302/sample-spring-webflux-pattern 에서 사용했던 같은 스키마 구조를 ORM으로 녹였습니다. 최대한 시간을 절약하기 위해.ㅎㅎ
++ UserCredential, CredentialRole, AccountRole 테이블이 Security 기능을 온전히 구현하기 위해 추가되었습니다.
 
 ## Need to Study
 
 - [x] Setup DGS
     - [Issue] ~~graphql.java library version conflict issue~~ => resolved
-- [x] Relations (1:1, 1:N, N:N) in JPA
-    - Implement N:N relation using double OneToMany in (Posting & PostingImage & Image) if want to set extra column in
-      JoinTable
+- [x] Relations (1:1, 1:N, N:N) using JPA
+    - Implement N:N relation using double OneToMany in (Posting & PostingImage & Image) if want to set extra column in JoinTable
 - [x] Apply DataFetcher
 - [x] Apply DataLoader in join column
     - [x] [Performance Tested] getAllPostings : 2 posting each has 500 images => fast enough
     - [x] [Performance Tested] getAllPostings : 100 postings each has 500 images => 1300ms
-    - [x] [Performance Tested] getAllPostings(+pagination) : 10 postings each has 100 images(normal use case in
-      production) => 111ms
+    - [x] [Performance Tested] getAllPostings(+pagination) : 10 postings each has 100 images(normal use case in production) => 111ms
+    - [x] [Performance Tested] getAllPostings(+pagination) : 10 postings each has 100 images with 10 comments => 180ms
 - [x] Aggregate(Count) field
   - aggregate용 쿼리를 따로 제작(기존 쿼리안에 _count 필드로 녹이는 법은 반환 객체를 감싸는 객체를 만든 후, 거기에다 _count를 넣으면 되지만 filter나 input에 대해 분기처리가 많아지는 경우 로직이 복잡해지기 쉽고, 개인적으로 프론트에서 작업할 때도 독립적인 query로 가져오는 방식을 더 사용하게 됨. 성능적인 이슈도 존재)
 - [x] Pagination(Pageable), OrderBy(Sort) etc.. Filter input
-- [ ] Security
-- [x] Instrumentation(logging, metrics) => check turnaround
+- [x] Security
+  - [x] Single Endpoint authentication(그래프큐엘이 단일 엔드포인트이기 때문에)
+  - [x] Query, Mutation authentication, authorization using 'Pre-Authorize'(쿼리별로 보안 설정)
+  - [x] Jwt stateless authentication, authorization(세션이 아닌 Jwt 토큰 방식 사용)
+  - [x] Set auth related db tables in entities, graphql schemas(단순히 인메모리 데이터가 아닌 ERD 적용하여 디비 데이터를 테스트에 사용)
+- [x] Instrumentation(logging, metrics) => check turnaround per each method
 
 ## ENV
 ```yml
 dgs:
   graphql:
+    title : <웹사이트 이름>
     graphiql:
       enabled: true
-    path: /graphql/**
+    path: /graphql/** 
 
 spring:
   server:

@@ -1,10 +1,10 @@
-package com.ritier.samplespringgraphql.datafetcher
+package com.ritier.samplespringgraphql.graphql.datafetcher
 
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
 import com.ritier.samplespringgraphql.DgsConstants
-import com.ritier.samplespringgraphql.dataloader.CommentDataLoader
+import com.ritier.samplespringgraphql.graphql.dataloader.CommentDataLoader
 import com.ritier.samplespringgraphql.entity.Comment
 import com.ritier.samplespringgraphql.entity.Posting
 import com.ritier.samplespringgraphql.service.CommentService

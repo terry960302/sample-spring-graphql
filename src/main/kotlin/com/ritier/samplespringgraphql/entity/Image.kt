@@ -24,7 +24,8 @@ data class Image(
     @OneToMany(
         mappedBy = "image",
         cascade = [CascadeType.ALL],
-        orphanRemoval = true)
+        orphanRemoval = true,
+        fetch = FetchType.LAZY)
     val postingImages : List<PostingImage>? = null,
 ) {
     override fun toString(): String {

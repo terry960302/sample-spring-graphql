@@ -1,4 +1,4 @@
-package com.ritier.samplespringgraphql.scalars
+package com.ritier.samplespringgraphql.graphql.scalars
 
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsRuntimeWiring

@@ -1,11 +1,11 @@
-package com.ritier.samplespringgraphql.datafetcher
+package com.ritier.samplespringgraphql.graphql.datafetcher
 
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.DgsDataFetchingEnvironment
 import com.netflix.graphql.dgs.InputArgument
 import com.ritier.samplespringgraphql.DgsConstants
-import com.ritier.samplespringgraphql.dataloader.PostingImageDataloader
+import com.ritier.samplespringgraphql.graphql.dataloader.PostingImageDataloader
 //import com.ritier.samplespringgraphql.dataloader.ProfileImageDataLoader
 import com.ritier.samplespringgraphql.entity.Image
 import com.ritier.samplespringgraphql.entity.Posting
@@ -14,6 +14,8 @@ import com.ritier.samplespringgraphql.types.ImageFilter
 import kotlinx.coroutines.runBlocking
 import org.dataloader.DataLoader
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.annotation.Secured
+import org.springframework.security.access.prepost.PreAuthorize
 import java.util.concurrent.CompletableFuture
 
 @DgsComponent

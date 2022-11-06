@@ -1,6 +1,5 @@
 package com.ritier.samplespringgraphql.service
 
-import com.ritier.samplespringgraphql.dto.ImageOnlyUrlDto
 import com.ritier.samplespringgraphql.entity.Image
 import com.ritier.samplespringgraphql.entity.PostingImage
 import com.ritier.samplespringgraphql.repository.ImageRepository
@@ -29,6 +28,8 @@ class ImageService {
     fun getImage(id: Long): Optional<Image> {
         return imageRepository.findById(id)
     }
+
+    fun countImages() :Int = imageRepository.count().toInt()
 
     fun getAllImages(): List<Image> {
         return imageRepository.findAll()
@@ -59,18 +60,6 @@ class ImageService {
     }
 
     fun createImage(image: Image) = imageRepository.save(image)
-
-    fun countImages(): Int = imageRepository.countImages().getCount()
-
-    fun getAllImageUrls(): List<ImageOnlyUrlDto> {
-        val images = imageRepository.findAllOnlyUrlBy()
-
-//        println(images)
-//        return images.map {
-//             mapOf("url" to it.getUrl(), "id" to it.getId())
-//        }
-        return images
-    }
 
     suspend fun createMockImages() = withContext(Dispatchers.IO) {
         val mockImageUrls = arrayListOf<String>()

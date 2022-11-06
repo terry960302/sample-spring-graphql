@@ -30,4 +30,23 @@ type User{
     nickname : String!,
     age : Int!,
     profileImg : Image,
+    credential : UserCredential,
 }
+
+type UserCredential{
+    id : Int!,
+    email : String!,
+    password : String!,
+    createdAt : LocalDate,
+    roles : [AccountRole],
+}
+
+type AccountRole {
+    id : Int!,
+    name : String!,
+    description : String!,
+}
+
+
+
+

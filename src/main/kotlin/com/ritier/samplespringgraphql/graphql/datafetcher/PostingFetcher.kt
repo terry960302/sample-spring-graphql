@@ -1,17 +1,14 @@
-package com.ritier.samplespringgraphql.datafetcher
+package com.ritier.samplespringgraphql.graphql.datafetcher
 
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsData
 import com.netflix.graphql.dgs.InputArgument
 import com.ritier.samplespringgraphql.DgsConstants
-import com.ritier.samplespringgraphql.dto.PostingDto
 import com.ritier.samplespringgraphql.entity.Posting
-import com.ritier.samplespringgraphql.entity.User
 import com.ritier.samplespringgraphql.service.PostingService
 import com.ritier.samplespringgraphql.types.PaginationInput
 import graphql.schema.DataFetchingEnvironment
 import kotlinx.coroutines.runBlocking
-import org.modelmapper.ModelMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort

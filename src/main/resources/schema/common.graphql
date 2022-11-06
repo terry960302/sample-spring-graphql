@@ -2,14 +2,34 @@ type Aggregate{
     count : Int
 }
 
+type AuthToken{
+    accessToken : String!,
+    refreshToken : String,
+}
+
 extend type Query{
     aggregatePosting : Aggregate
-    aggregateImage : Aggregate
+    aggregateImage : Aggregate,
+}
+
+extend type Mutation{
+    createTestToken : AuthToken,
 }
 
 input PaginationInput{
     page : Int = 0,
     size : Int = 10,
+}
+
+input SignInInput{
+    email : String!,
+    password : String!,
+}
+
+input SignUpInput{
+    nickname : String!,
+    email : String!,
+    password : String!,
 }
 
 schema {

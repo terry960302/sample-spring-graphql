@@ -23,7 +23,9 @@ class CommentService {
     fun createComment(comment: Comment) = commentRepository.save(comment)
 
     fun getAllCommentsByPostingIds(ids: List<Long>): MutableMap<Long, List<Comment>> {
+        print("getAllCommentsByPostingIds@@@@@@@@@@@")
         val comments = commentRepository.getAllCommentsByPostingIds(ids)
+        print(comments.map { it.id })
         return comments.groupBy { it.posting.id }.toMutableMap()
     }
 

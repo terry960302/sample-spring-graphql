@@ -1,4 +1,4 @@
-package com.ritier.samplespringgraphql.instumentation
+package com.ritier.samplespringgraphql.graphql.instumentation
 
 import graphql.ExecutionResult
 import graphql.execution.instrumentation.InstrumentationContext
