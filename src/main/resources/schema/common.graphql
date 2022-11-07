@@ -10,6 +10,7 @@ type AuthToken{
 extend type Query{
     aggregatePosting : Aggregate
     aggregateImage : Aggregate,
+    aggregateComment : Aggregate,
 }
 
 extend type Mutation{

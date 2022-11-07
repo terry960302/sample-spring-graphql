@@ -79,8 +79,6 @@ class UserService {
 
         val createdRoles = accountRoleRepository.saveAllAndFlush(listOf(role1, role2, role3))
 
-        println("@@ role saved")
-
         // user with credential
         val user = User(
             nickname = input.nickname,
@@ -91,8 +89,6 @@ class UserService {
 
         val createdUser = userRepository.saveAndFlush(user)
 
-        println("@@ user saved")
-
         val cred = UserCredential(
             user = entityManager.getReference(User::class.java, createdUser.id),
             email = input.email,
@@ -100,8 +96,6 @@ class UserService {
         )
 
         val createdCred = credentialRepository.saveAndFlush(cred)
-
-        println("@@ credential saved")
 
         val credRole1 = CredentialRole(
             userCredential = createdCred,
@@ -114,17 +108,12 @@ class UserService {
 
         credentialRoleRepository.saveAllAndFlush(listOf(credRole1, credRole2))
 
-        println("@@ credential role saved")
-
         val resultUser = entityManager.getReference(User::class.java, createdUser.id)
 
-        println(resultUser)
-
-        val roles: List<String> = resultUser.credential!!.credentialRoles?.map { it.accountRole!!.name }!!
         val accessToken =
-            securityProvider.generateToken(resultUser.id, roles, expiration = SecurityProvider.accessExpiration)
+            securityProvider.generateToken(resultUser.id, listOf(createdRoles[0].name, createdRoles[1].name), expiration = SecurityProvider.accessExpiration)
         val refreshToken =
-            securityProvider.generateToken(resultUser.id, roles, expiration = SecurityProvider.refreshExpiration)
+            securityProvider.generateToken(resultUser.id, listOf(createdRoles[0].name, createdRoles[1].name), expiration = SecurityProvider.refreshExpiration)
 
         return AuthToken(accessToken, refreshToken)
     }
