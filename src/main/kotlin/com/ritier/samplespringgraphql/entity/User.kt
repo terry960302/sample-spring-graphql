@@ -1,5 +1,7 @@
 package com.ritier.samplespringgraphql.entity
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import org.hibernate.annotations.Type
 import javax.persistence.*
 
 @Entity
@@ -13,17 +15,26 @@ data class User(
 
     @Column(name = "age") val age: Int,
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_img_id")
     val profileImg: Image? = null,
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     val postings: List<Posting>? = null,
 
-    @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val credential : UserCredential? = null,
+    @Transient
+    var hasPosting: Boolean = false,
+
+    @OneToOne(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.LAZY)
+    val credential: UserCredential? = null,
 ) {
-//    override fun toString(): String {
-//        return "User{id = $id, nickname = $nickname, age = $age, profile_img_id : $${profileImg.toString()}}"
-//    }
+
+    @PostLoad
+    fun postload(){
+        hasPosting = if (postings == null) {
+            false
+        } else {
+            postings!!.isNotEmpty()
+        }
+    }
 }

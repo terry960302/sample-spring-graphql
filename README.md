@@ -18,6 +18,7 @@
     - [Issue] ~~graphql.java library version conflict issue~~ => resolved
 - [x] Relations (1:1, 1:N, N:N) using JPA
     - Implement N:N relation using double OneToMany in (Posting & PostingImage & Image) if want to set extra column in JoinTable
+    - Fetch extra custom fields with entity not in DB columns using @Transient & @Postload annotations
 - [x] Apply DataFetcher
 - [x] Apply DataLoader in join column
     - [x] [Performance Tested] getAllPostings : 2 posting each has 500 images => fast enough
@@ -38,15 +39,15 @@
 ```yml
 dgs:
   graphql:
-    title : <웹사이트 이름>
     graphiql:
+      title: "Sample-Spring-Graphql"
       enabled: true
-    path: /graphql/** 
+    path: /graphql/**
+server:
+  host: localhost
+  port: 8000
 
 spring:
-  server:
-    host: localhost
-    port: 8000
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres
@@ -55,7 +56,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: validate # create-drop, create, update, validate, none
+      ddl-auto: create-drop # create-drop, create, update, validate, none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
@@ -68,7 +69,7 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace # 
+    org.hibernate.type: trace
 ```
 
 ## References
