@@ -12,6 +12,42 @@
 : https://github.com/terry960302/sample-spring-webflux-pattern 에서 사용했던 같은 스키마 구조를 ORM으로 녹였습니다. 최대한 시간을 절약하기 위해.ㅎㅎ
 + UserCredential, CredentialRole, AccountRole 테이블이 Security 기능을 온전히 구현하기 위해 추가되었습니다.
 
+## Issues
+
+- MappedBatchLoader with default value
+    #### 
+    ```kotlin
+    // common function example used in dataloader
+      fun getAccountRolesByCredentialIds(ids: List<Long>): MutableMap<Long, List<AccountRole>> {
+        val roles: List<CredentialRole> = credentialRoleRepository.getCredentialRolesByCredentialIds(ids)
+        return roles.groupBy { it.userCredential!!.user!!.id } 
+            .map { uc -> uc.key to uc.value.map { cred -> cred.accountRole!! } }.toMap().toMutableMap()
+    }
+    ```
+    ```markdown
+    But `groupBy` method not include all ids. 
+  
+    Some accountRoles entities under credential entity will set to be `null`.
+    But we want it be `empty list`.
+  
+    So made `groupFillBy` method.
+    ```
+    ```kotlin
+    // use this function
+    inline fun <T, K> Iterable<T>.groupFillBy(keys : Iterable<K>, keySelector: (T) -> K): Map<K, List<T>> {
+        val groups = LinkedHashMap<K, MutableList<T>>()
+        for (key in keys){
+            groups[key] = mutableListOf()
+        }
+        for (element in this) {
+            val key : K = keySelector(element)
+            val list = groups.getOrPut(key) { ArrayList<T>() }
+            list.add(element)
+        }
+        return groups
+    }
+    ``` 
+
 ## Need to Study
 
 - [x] Setup DGS
