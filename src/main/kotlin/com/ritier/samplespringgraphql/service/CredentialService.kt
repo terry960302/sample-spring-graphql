@@ -20,11 +20,11 @@ class CredentialService {
     private lateinit var passwordEncoder: BCryptPasswordEncoder
 
     fun signIn(email: String, password: String): AuthToken {
-        if (credentialRepository.findByEmail(email).isEmpty) throw Error("There's no user match to email")
-        val encryptedPw = passwordEncoder.encode(password)
+        val userCred = credentialRepository.findByEmail(email)
+        if (userCred.isEmpty) throw Error("There's no user whose email is $email")
 
-        val userCred = credentialRepository.findByEmailAndPassword(email, encryptedPw)
-        if (userCred.isEmpty) throw Error("Check Email or Password")
+        val hasUser = passwordEncoder.matches(password, userCred.get().password)
+        if(!hasUser)  throw Error("Please check your password.")
 
         val userId = userCred.get().user!!.id
         val roles = userCred.get().credentialRoles?.map { it.accountRole!!.name }!!
